@@ -2,7 +2,7 @@ const projectModel = require('./data/helpers/projectModel');
 const actionModel = require('./data/helpers/actionModel');
 
 const projectRoutes = require('./routes/projectRoutes');
-const actionRoutes = require('./routes/actionRoutes');
+// const actionRoutes = require('./routes/actionRoutes');
 
 const express = require('express');
 const server = express();
