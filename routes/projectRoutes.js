@@ -1,12 +1,12 @@
 const express = require('express');
 
-const pM = require('../data/helpers/projectModel');
+const pModel = require('../data/helpers/projectModel');
 const actionRoutes = require('./actionRoutes');
 
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    pM
+    pModel
         .get()
         .then(users => {
             res.json(users);
@@ -19,7 +19,7 @@ router.get('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
     const { id } = req.params;
 
-    pM
+    pModel
         .get(id)
         .then(users => {
             res.json(users);
@@ -32,10 +32,10 @@ router.get('/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
     const userInfo = req.body;
 
-    pM
+    pModel
         .insert(userInfo)
         .then(response => {
-            pM
+            pModel
                 .get()
                 .then(users => {
                     res.json(users);
@@ -53,10 +53,10 @@ router.put('/:id', (req, res, next) => {
     const { id } = req.params;
     const update = req.body;
 
-    pM
+    pModel
         .update(id, update)
         .then(response => {
-            pM.get()
+            pModel.get()
                 .then(users => {
                     res.json(users);
                 })
@@ -72,10 +72,10 @@ router.put('/:id', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
     const { id } = req.params;
 
-    pM
+    pModel
         .remove(id)
         .then(response => {
-            pM.get()
+            pModel.get()
                 .then(users => {
                     res.json(users);
                 })
@@ -91,7 +91,7 @@ router.delete('/:id', (req, res, next) => {
 router.get('/:id/actions', (req, res, next) => {
     const { id } = req.params;
 
-    pM
+    pModel
         .getProjectActions(id)
         .then(actions => {
             res.json(actions);
