@@ -1,6 +1,7 @@
 const express = require('express');
 
 const pM = require('../data/helpers/projectModel');
+const actionRoutes = require('./actionRoutes');
 
 const router = express.Router();
 
@@ -86,5 +87,20 @@ router.delete('/:id', (req, res, next) => {
             res.status(500).json({ error: err });
         });
 });
+
+router.get('/:id/actions', (req, res, next) => {
+    const { id } = req.params;
+
+    pM
+        .getProjectActions(id)
+        .then(actions => {
+            res.json(actions);
+        })
+        .catch(err => {
+            res.status(500).json({ error: err});
+        });
+});
+
+router.use('/:id/actions', actionRoutes);
 
 module.exports = router;
